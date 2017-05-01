@@ -15,7 +15,7 @@ namespace Movie_review.Controllers
 {
     public class reviewsController : ApiController
     {
-        private WebServiceEntities2 db = new WebServiceEntities2();
+        private WebServiceEntities4 db = new WebServiceEntities4();
 
         // GET: api/reviews
         public IQueryable<review> Getreviews()

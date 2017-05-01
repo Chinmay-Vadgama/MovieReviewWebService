@@ -15,7 +15,7 @@ namespace Movie_review.Controllers
 {
     public class usersController : ApiController
     {
-        private WebServiceEntities2 db = new WebServiceEntities2();
+        private WebServiceEntities4 db = new WebServiceEntities4();
 
         // GET: api/users
         public IQueryable<user> Getusers()
@@ -25,7 +25,7 @@ namespace Movie_review.Controllers
 
         // GET: api/users/5
         [ResponseType(typeof(user))]
-        public async Task<IHttpActionResult> Getuser(string id)
+        public async Task<IHttpActionResult> Getuser(int id)
         {
             user user = await db.users.FindAsync(id);
             if (user == null)
@@ -38,7 +38,7 @@ namespace Movie_review.Controllers
 
         // PUT: api/users/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putuser(string id, user user)
+        public async Task<IHttpActionResult> Putuser(int id, user user)
         {
             if (!ModelState.IsValid)
             {
@@ -81,29 +81,14 @@ namespace Movie_review.Controllers
             }
 
             db.users.Add(user);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (userExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // DELETE: api/users/5
         [ResponseType(typeof(user))]
-        public async Task<IHttpActionResult> Deleteuser(string id)
+        public async Task<IHttpActionResult> Deleteuser(int id)
         {
             user user = await db.users.FindAsync(id);
             if (user == null)
@@ -126,7 +111,7 @@ namespace Movie_review.Controllers
             base.Dispose(disposing);
         }
 
-        private bool userExists(string id)
+        private bool userExists(int id)
         {
             return db.users.Count(e => e.Id == id) > 0;
         }

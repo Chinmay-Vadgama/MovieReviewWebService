@@ -15,7 +15,7 @@ namespace Movie_review.Controllers
 {
     public class adminsController : ApiController
     {
-        private WebServiceEntities2 db = new WebServiceEntities2();
+        private WebServiceEntities4 db = new WebServiceEntities4();
 
         // GET: api/admins
         public IQueryable<admin> Getadmins()

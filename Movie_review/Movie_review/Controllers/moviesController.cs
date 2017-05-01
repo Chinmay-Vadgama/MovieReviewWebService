@@ -15,7 +15,7 @@ namespace Movie_review.Controllers
 {
     public class moviesController : ApiController
     {
-        private WebServiceEntities2 db = new WebServiceEntities2();
+        private WebServiceEntities4 db = new WebServiceEntities4();
 
         // GET: api/movies
         public IQueryable<movie> Getmovies()
@@ -81,22 +81,7 @@ namespace Movie_review.Controllers
             }
 
             db.movies.Add(movie);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (movieExists(movie.MovieId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = movie.MovieId }, movie);
         }

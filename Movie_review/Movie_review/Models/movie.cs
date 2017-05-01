@@ -22,7 +22,6 @@ namespace Movie_review.Models
     
         public int MovieId { get; set; }
         public string name { get; set; }
-        public byte[] image { get; set; }
         public string category { get; set; }
         public int year { get; set; }
         public int totalreview { get; set; }
